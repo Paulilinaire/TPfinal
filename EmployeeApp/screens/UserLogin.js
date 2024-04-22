@@ -1,10 +1,9 @@
 import React, {FC, ReactElement, useState} from 'react';
-import { Alert, Text, TextInput, TouchableOpacity, View,} from 'react-native';
-import Styles from './Styles';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert, Text, TextInput, TouchableOpacity, View, StyleSheet} from 'react-native';
+import {AsyncStorage} from 'react-native';
 import axios from 'axios';
 
-export default function UserLoginScreen() {
+export default function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,8 +17,8 @@ export default function UserLoginScreen() {
     setLoading(true);
 
     try {
-        // Send login request to backend
-        const response = await axios.post('http://XXXXXXX/api/auth/user', {
+        // send login request to backend
+        const response = await axios.post('http://localhost:8080/api/auth/user', {
           email,
           password,
         });
@@ -27,12 +26,12 @@ export default function UserLoginScreen() {
         // response with JWT token
         const { token, user } = response.data;
   
-        // Store the token in AsyncStorage
+        // store the token in AsyncStorage
         await AsyncStorage.setItem('authToken', token);
   
         setLoading(false);
   
-       // redirect into HomePage
+       // redirect to HomePage
         navigation.replace('HomePage', { user });
   
       } catch (error) {
@@ -47,26 +46,28 @@ export default function UserLoginScreen() {
     };
 
   return (
-    <View style={Styles.login_wrapper}>
-      <View style={Styles.form}>
+    <View style={styles.login_wrapper}>
+      <View style={styles.form}>
+        <Text style={styles.title}>Welcome BacK!</Text>
+        <Text style={styles.desc}>Login to continue</Text>
         <TextInput
-          style={Styles.form_input}
+          style={styles.form_input}
           value={email}
-          placeholder={'email'}
+          placeholder={'Email'}
           onChangeText={(text) => setEmail(text)}
           autoCapitalize={'none'}
           keyboardType={'email-address'}
         />
         <TextInput
-          style={Styles.form_input}
+          style={styles.form_input}
           value={password}
           placeholder={'Password'}
           secureTextEntry
           onChangeText={(text) => setPassword(text)}
         />
         <TouchableOpacity onPress={() => {}}>
-          <View style={Styles.button}>
-            <Text style={Styles.button_label}>{'Sign in'}</Text>
+          <View style={styles.button}>
+            <Text style={styles.button_label} onPress={handleLogin}>{'Log in'}</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -75,15 +76,43 @@ export default function UserLoginScreen() {
 };
 
 const styles = StyleSheet.create({ 
-    form_input:{
-
+    login_wrapper: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: "#FFFFFF"
     },
-    button:{
-
+    title: {
+      color:"#233863",
+      fontSize: 25,
+      fontWeight: 'bold'
     },
-    button_label:{
+    desc:{
+      color:"#FA9746",
+      fontSize: 15,
+    },
+    form: {
+      width: '80%', 
+    },
+    form_input: {
+      borderWidth: 1, 
+      borderColor: '#B0D0FF',
+      borderRadius: 40,
+      padding: 10, 
+      marginBottom: 10, 
+    },
+    button: {
+      backgroundColor: '#233863', 
+      padding: 15, 
+      borderRadius: 40, 
+      alignItems: 'center', 
+    },
+    button_label: {
+      color: '#FFFFFF',
+      fontWeight: 'bold',
+      fontSize: 20,
+    },
+  });
 
-    }
- });
 
 
