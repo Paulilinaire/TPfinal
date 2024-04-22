@@ -16,7 +16,7 @@ public class InitConfig implements CommandLineRunner {
 
 
     private void thereIsAdmin(){
-        User user=service.findUserByRole(Role.ADMIN);
+        User user=service.findUserByRole(Role.ROLE_ADMIN);
         if(user==null){
             User admin=User.builder().
                     firstname("admin").
@@ -24,7 +24,7 @@ public class InitConfig implements CommandLineRunner {
                     jobTitle(JobTitle.ADMIN).
                     email("admin@mail.fr").
                     password("admin").
-                    role(Role.ADMIN).
+                    role(Role.ROLE_ADMIN).
                     build();
 
             service.createUser(admin);
@@ -32,7 +32,7 @@ public class InitConfig implements CommandLineRunner {
     }
 
     private void thereIsEmployee(){
-        User user=service.findUserByRole(Role.EMPLOYEE);
+        User user=service.findUserByRole(Role.ROLE_USER);
         if(user==null){
             User employee=User.builder().
                     firstname("user").
@@ -40,7 +40,7 @@ public class InitConfig implements CommandLineRunner {
                     jobTitle(JobTitle.SALARY).
                     email("user@mail.fr").
                     password("user").
-                    role(Role.EMPLOYEE).
+                    role(Role.ROLE_USER).
                     build();
 
             service.createUser(employee);

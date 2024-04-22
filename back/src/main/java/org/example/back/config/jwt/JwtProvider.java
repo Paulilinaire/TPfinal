@@ -41,7 +41,7 @@ public class JwtProvider {
 
         return Jwts.builder()
                 .setSubject(username)
-                .claim("role", Role.valueOf(role))
+                .claim("roles", role)
                 .setExpiration(expireDate)
                 .setIssuedAt(new Date())
                 .signWith(getSigninKey(), SignatureAlgorithm.HS512)
