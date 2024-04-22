@@ -23,27 +23,27 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    UserRepository userRepository;
-
 
     @PostMapping
-    public BaseResponseDto loginUser(@RequestBody UserLoginDto loginDetails){
-        if(userService.checkUserNameExists(loginDetails.getEmail())){
-            if(userService.verifyUser(loginDetails.getEmail(), loginDetails.getPassword())){
+    public BaseResponseDto loginUser(@RequestBody UserLoginDto loginDetails) {
+        Optional<User> optionalUser = userService.getUserByEmail(loginDetails.getEmail());
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            if (userService.verifyUser(loginDetails.getEmail(), loginDetails.getPassword())) {
                 Map<String, Object> data = new HashMap<>();
-                System.out.println(loginDetails.getEmail());
-                System.out.println(loginDetails.getPassword());
-                Optional<User> user = userService.getUserByEmailAndPassword(loginDetails.getEmail(), loginDetails.getPassword());
-                User userRecup = user.get();
+
                 data.put("token", userService.generateToken(loginDetails.getEmail(), loginDetails.getPassword()));
-                return new BaseResponseDto("Login with success", data, userRecup);
-            }else {
-                return new BaseResponseDto("Wrong password");
+                data.put("user", user);
+
+                return new BaseResponseDto("Login successful", data, user);
+            } else {
+                return new BaseResponseDto("Incorrect password");
             }
-        }else {
+        } else {
             return new BaseResponseDto("User does not exist");
         }
     }
-
 }
+
+

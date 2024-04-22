@@ -73,8 +73,8 @@ public class UserService implements UserDetailsService {
         return repository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found with mail " + username));
     }
 
-    public Optional<User> getUserByEmailAndPassword(String email, String password) {
-        return repository.findByEmailAndPassword(email, password);
+    public Optional<User> getUserByEmail(String email) {
+        return repository.findByEmail(email);
     }
 
 }
