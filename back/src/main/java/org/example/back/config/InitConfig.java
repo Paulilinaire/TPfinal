@@ -30,8 +30,25 @@ public class InitConfig implements CommandLineRunner {
             service.createUser(admin);
         }
     }
+
+    private void thereIsEmployee(){
+        User user=service.findUserByRole(Role.EMPLOYEE);
+        if(user==null){
+            User employee=User.builder().
+                    firstname("user").
+                    lastname("user").
+                    jobTitle(JobTitle.SALARY).
+                    email("user@mail.fr").
+                    password("user").
+                    role(Role.EMPLOYEE).
+                    build();
+
+            service.createUser(employee);
+        }
+    }
     @Override
     public void run(String... args) throws Exception {
         thereIsAdmin();
+        thereIsEmployee();
     }
 }
