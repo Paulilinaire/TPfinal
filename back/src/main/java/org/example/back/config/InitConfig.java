@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class InitConfig implements CommandLineRunner {
 
@@ -16,7 +18,7 @@ public class InitConfig implements CommandLineRunner {
 
 
     private void thereIsAdmin(){
-        User user=service.findUserByRole(Role.ADMIN);
+        User user=service.findUserByRole(Role.ROLE_ADMIN);
         if(user==null){
             User admin=User.builder().
                     firstname("admin").
@@ -24,7 +26,7 @@ public class InitConfig implements CommandLineRunner {
                     jobTitle(JobTitle.ADMIN).
                     email("admin@mail.fr").
                     password("admin").
-                    role(Role.ADMIN).
+                    role(Role.ROLE_ADMIN).
                     build();
 
             service.createUser(admin);
@@ -32,15 +34,15 @@ public class InitConfig implements CommandLineRunner {
     }
 
     private void thereIsEmployee(){
-        User user=service.findUserByRole(Role.EMPLOYEE);
-        if(user==null){
+        List<User> users=service.findUsersByRole(Role.ROLE_EMPLOYEE);
+        if(users==null){
             User employee=User.builder().
                     firstname("user").
                     lastname("user").
                     jobTitle(JobTitle.SALARY).
                     email("user@mail.fr").
                     password("user").
-                    role(Role.EMPLOYEE).
+                    role(Role.ROLE_EMPLOYEE).
                     build();
 
             service.createUser(employee);

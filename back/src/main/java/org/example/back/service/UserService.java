@@ -16,6 +16,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 
 @Service
 public class UserService implements UserDetailsService {
@@ -48,6 +51,11 @@ public class UserService implements UserDetailsService {
         return repository.searchUserByRole(role);
     }
 
+    public List<User> findUsersByRole(Role role) {
+        return repository.searchUsersByRole(role);
+    }
+
+
     public boolean verifyUser(String email, String password) {
         return repository.findByEmail(email).map(user -> encoder.matches(password, user.getPassword()))
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
@@ -64,4 +72,9 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return repository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found with mail " + username));
     }
+
+    public Optional<User> getUserByEmailAndPassword(String email, String password) {
+        return repository.findByEmailAndPassword(email, password);
+    }
+
 }
