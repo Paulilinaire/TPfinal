@@ -1,5 +1,6 @@
 package org.example.back.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.example.back.config.jwt.JwtProvider;
 import org.example.back.entity.Role;
 import org.example.back.entity.User;
@@ -15,6 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -63,5 +66,37 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return repository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found with mail " + username));
+    }
+
+    public List<User> getAllUsers() {
+        return repository.findAll();
+    }
+
+    public User getUserById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found"));
+    }
+
+    public User updateUser(Long id, User userUpdateDetails) {
+        User user = getUserById(id);
+        user.setRole(userUpdateDetails.getRole());
+        user.setJobTitle(userUpdateDetails.getJobTitle());
+        user.setFirstname(userUpdateDetails.getFirstname());
+        user.setLastname(userUpdateDetails.getLastname());
+        user.setEmail(userUpdateDetails.getEmail());
+        user.setPassword(userUpdateDetails.getPassword());
+        if (createUser(user)) {
+            return getUserById(id);
+        }
+        return null;
+    }
+
+    public boolean deleteUser(Long id) {
+        User user = getUserById(id);
+        if (user != null) {
+            repository.delete(user);
+            return true;
+        }
+        return false;
     }
 }

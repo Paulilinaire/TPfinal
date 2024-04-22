@@ -2,6 +2,7 @@ package org.example.back.config;
 
 import org.example.back.config.jwt.JwtEntryPoint;
 import org.example.back.config.jwt.JwtRequestFilter;
+import org.example.back.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,7 +39,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize->authorize.requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/api/user/**").hasRole("EMPLOYEE")
+                        .requestMatchers("/api/user/**").hasRole("USER")
                         .anyRequest().authenticated())
                 .exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(entryPoint))
                 .addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class)

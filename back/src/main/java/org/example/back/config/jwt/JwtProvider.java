@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.example.back.entity.Role;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
@@ -40,7 +41,7 @@ public class JwtProvider {
 
         return Jwts.builder()
                 .setSubject(username)
-                .claim("role",role )
+                .claim("roles", role)
                 .setExpiration(expireDate)
                 .setIssuedAt(new Date())
                 .signWith(getSigninKey(), SignatureAlgorithm.HS512)
