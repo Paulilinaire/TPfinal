@@ -14,8 +14,7 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       await authService.login(mail, password);
-      // navigate();
-      // Insérer lien page d'accueil
+      navigate("/dashboard");
     } catch (e) {
       setError("Incorrect logins");
     }

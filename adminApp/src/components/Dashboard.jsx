@@ -4,10 +4,7 @@ import {userService} from "../service/user-service.js";
 
 const Dashboard = () => {
 
-    const [users, setUsers] = useState([
-        {lastname: "DOE", email: "john.doe@email.com"},
-        {lastname: "SMITH", email: "matt.smith@email.com"}
-    ]);
+    const [users, setUsers] = useState([]);
     const [error, setError] = useState("")
 
     useEffect(() => {
@@ -29,10 +26,10 @@ const Dashboard = () => {
                 )
             }
             {
-                /*!*/error && (
-                    <table>
+                !error && (
+                    <table className="table-auto text-center rounded">
                         <thead>
-                        <tr>
+                        <tr style={{color: "#233863", backgroundColor: "#EAF3FA"}}>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Actions</th>
