@@ -27,7 +27,7 @@ const LoginForm = () => {
         <img src={logo} alt="Logo" className="size-36" />
         <h2 className="text-xl">
           <span style={{ color: "#FA9746" }}>Time</span>
-          <span className="font-bold">Flow</span>
+          <span style={{ color: "#233863" }} className="font-bold">Flow</span>
         </h2>
       </header>
       <main className="flex space-x-2.5 items-center">
