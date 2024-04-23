@@ -11,7 +11,7 @@ public class EnvConfig{
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
-        configurer.setLocation(new FileSystemResource("env"));
+        configurer.setLocation(new FileSystemResource(".env"));
         return configurer;
     }
 }

@@ -18,8 +18,8 @@ public class InitConfig implements CommandLineRunner {
 
 
     private void thereIsAdmin(){
-        User user=service.findUserByRole(Role.ROLE_ADMIN);
-        if(user==null){
+        List<User> users=service.findUsersByRole(Role.ROLE_ADMIN);
+        if(users.isEmpty()){
             User admin=User.builder().
                     firstname("admin").
                     lastname("admin").
@@ -35,7 +35,7 @@ public class InitConfig implements CommandLineRunner {
 
     private void thereIsEmployee(){
         List<User> users=service.findUsersByRole(Role.ROLE_USER);
-        if(users==null){
+        if(users.isEmpty()){
             User employee=User.builder().
                     firstname("user").
                     lastname("user").

@@ -48,10 +48,6 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-    public User findUserByRole(Role role) {
-        return repository.findUserByRole(role);
-    }
-
     public List<User> findUsersByRole(Role role) {
         return repository.searchUsersByRole(role);
     }
