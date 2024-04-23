@@ -1,4 +1,3 @@
-import { data } from "autoprefixer";
 import api from "./api";
 
 const login = (mail, password) => {

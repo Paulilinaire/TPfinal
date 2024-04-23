@@ -1,54 +1,87 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import authService from "../service/auth-service";
+import logo from "../assets/LOGO.png";
+import background from "../assets/backgroundLogin.png";
 
 const LoginForm = () => {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleLogin = async (e) => {
-    e.prevendDefault();
+    e.preventDefault();
     try {
       await authService.login(mail, password);
       // navigate();
+      // Insérer lien page d'accueil
     } catch (e) {
-      setError("Échec de la connexion. Veuillez vérifier vos identifiants.");
+      setError("Incorrect logins");
     }
   };
 
   return (
     <>
-      <div className="flex content-between">
-        <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Welcome back
-            </h2>
-            <h3 className="text-center text-1xl leading-9 tracking-tight text-gray-900">
-              Login to continue
+      <header className="flex items-center">
+        <img src={logo} alt="Logo" className="size-36" />
+        <h2 className="text-xl">
+          <span style={{ color: "#FA9746" }}>Time</span>
+          <span className="font-bold">Flow</span>
+        </h2>
+      </header>
+      <main className="flex space-x-2.5 items-center">
+        <div
+          style={{ borderColor: "#B0D0FF" }}
+          className="border-2 rounded-lg ml-5 pl-3 w-5/12 drop-shadow"
+        >
+          <div className="ml-40 mt-28">
+            <h3 style={{ color: "#233863" }} className="font-semibold text-xl">
+              Welcome back !
             </h3>
+            <h2 style={{ color: "#FA9746" }} className="font-medium m-3	">
+              Login to continue
+            </h2>
           </div>
-          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-              <div>
-                <div class="mt-2">
-                  <input
-                    id="mail"
-                    name="mail"
-                    type="mail"
-                    required
-                    placeholder="Email"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-            </form>
-          </div>
+          {error && (
+            <div class="p-4 mb-4 ml-40 w-6/12 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
+              <span class="font-medium">Error: </span> {error}
+            </div>
+          )}
+          <form onSubmit={handleLogin} className="ml-40 mt-4 flex flex-col">
+            <input
+              type="text"
+              placeholder="Email"
+              value={mail}
+              onChange={(e) => setMail(e.target.value)}
+              style={{
+                borderColor: "#B0D0FF",
+              }}
+              className="input shadow-inner bg-gray-50 border w-8/12 text-sm rounded-3xl p-2.5"
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={{
+                borderColor: "#B0D0FF",
+              }}
+              className="input shadow-inner bg-gray-50 border w-8/12 text-sm rounded-3xl p-2.5 mt-5"
+              required
+            />
+            <button
+              type="submit"
+              style={{ backgroundColor: "#233863" }}
+              class="mt-5 mb-24 w-8/12 px-6 py-3.5 text-base font-medium text-white rounded-lg text-center"
+            >
+              Log in
+            </button>
+          </form>
         </div>
-        <div></div>
-      </div>
+        <img src={background} alt="Background" />
+      </main>
     </>
   );
 };
