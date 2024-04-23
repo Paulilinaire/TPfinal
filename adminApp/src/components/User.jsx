@@ -10,7 +10,7 @@ const User = ({user}) => {
                 <td style={{color: "#233863"}}>{user.lastname}</td>
                 <td style={{color: "#3586FD"}}>{user.email}</td>
                 <td>
-                    <button onClick={() => navigate("/details")} style={{color: "#233863", backgroundColor: "#FFF"}}
+                    <button onClick={() => navigate(`/details/${user.id}`)} style={{color: "#233863", backgroundColor: "#FFF"}}
                             className="rounded shadow">
                         details
                     </button>
