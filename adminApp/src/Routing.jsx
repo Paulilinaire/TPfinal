@@ -6,6 +6,10 @@ const Routing = createBrowserRouter([
     path: "/",
     element: <EmployeeDetails />,
   },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+  }
 ]);
 
 export default Routing;
