@@ -29,12 +29,12 @@ const EmployeeForm = () => {
     <>
       <Navbar />
       <div
-        className="relative h-screen bg-cover bg-center flex flex-col items-center justify-center"
+        className="relative h-screen bg-cover bg-center flex flex-col items-center"
         style={{ backgroundImage: `url(${background})` }}
       >
         <div
           style={{ borderColor: "#B0D0FF" }}
-          className="border-2 rounded-lg p-14 bg-white drop-shadow-lg z-10 flex flex-col justify-center align-items-center"
+          className="border-2 rounded-lg p-14 bg-white drop-shadow-lg z-10 flex flex-col align-items-center mt-20"
         >
           <h3
             style={{ color: "#233863" }}

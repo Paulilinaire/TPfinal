@@ -14,7 +14,7 @@ export default function App() {
       <Stack.Navigator initialRouteName='UserLogin'>
         <Stack.Screen name='UserLogin' component={UserLogin} options={{ title: 'Log in' }} />
         <Stack.Screen name='HomePage' component={HomePage} />
-        <Stack.Screen name='CalendarPage' component={CalendarPage} options={{headerShown : false }}/>
+        <Stack.Screen name='CalendarPage' component={CalendarPage}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

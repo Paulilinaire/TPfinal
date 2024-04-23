@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class InitConfig implements CommandLineRunner {
 
@@ -32,8 +34,8 @@ public class InitConfig implements CommandLineRunner {
     }
 
     private void thereIsEmployee(){
-        User user=service.findUserByRole(Role.ROLE_USER);
-        if(user==null){
+        List<User> users=service.findUsersByRole(Role.ROLE_USER);
+        if(users==null){
             User employee=User.builder().
                     firstname("user").
                     lastname("user").

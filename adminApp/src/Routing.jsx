@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import EmployeeForm from "./components/EmployeeForm";
+import EmployeeDetails from "./components/EmployeeDetails";
 
 const Routing = createBrowserRouter([
   {
     path: "/",
-    element: <EmployeeForm />,
+    element: <EmployeeDetails />,
   },
 ]);
 

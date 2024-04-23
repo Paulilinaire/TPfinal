@@ -49,7 +49,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User findUserByRole(Role role) {
-        return repository.searchUserByRole(role);
+        return repository.findUserByRole(role);
     }
 
     public List<User> findUsersByRole(Role role) {

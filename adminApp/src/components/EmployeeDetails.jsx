@@ -15,7 +15,7 @@ const EmployeeDetails = () => {
       >
         <div
           style={{ borderColor: "#B0D0FF" }}
-          className="border-2 rounded-lg p-16 bg-white drop-shadow-lg z-10 flex flex-col justify-center align-items-center"
+          className="border-2 rounded-lg p-16 bg-white drop-shadow-lg z-10 flex flex-col align-items-center"
         >
           <h3
             style={{ color: "#233863" }}
