@@ -3,16 +3,17 @@ import { useNavigate } from "react-router-dom";
 import authService from "../service/auth-service";
 
 const LoginForm = () => {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleLogin = async (e) => {
-    e.prevendDefault();
+    e.preventDefault();
     try {
       await authService.login(mail, password);
       // navigate();
+      // Insérer lien page d'accueil
     } catch (e) {
       setError("Échec de la connexion. Veuillez vérifier vos identifiants.");
     }
@@ -29,9 +30,9 @@ const LoginForm = () => {
             <h3 className="text-center text-1xl leading-9 tracking-tight text-gray-900">
               Login to continue
             </h3>
+            {error && <span>{error}</span>}
           </div>
           <div className=" sm:mx-auto sm:w-full sm:max-w-sm">
-            {error && <p className="text-danger">{error}</p>}
             <form
               className="sm:mx-auto sm:w-full sm:max-w-sm"
               onSubmit={handleLogin}
