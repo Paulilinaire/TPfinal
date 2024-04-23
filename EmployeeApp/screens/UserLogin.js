@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Text, TextInput, TouchableOpacity, View, StyleSheet} from 'react-native';
+import { Alert, Text, TextInput, TouchableOpacity, View, StyleSheet, Image} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
@@ -38,7 +38,7 @@ export default function UserLogin({navigation}) {
         setLoading(false);
   
        // redirect to HomePage
-        const user = response.user;
+        const user = response.data.user;
         navigation.navigate('HomePage', {user});
   
       } catch (error) {
@@ -73,12 +73,14 @@ export default function UserLogin({navigation}) {
           secureTextEntry
           onChangeText={(text) => setPassword(text)}
         />
-        <TouchableOpacity onPress={handleLogin}>
-          <View style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
             <Text style={styles.button_label}>{'Log in'}</Text>
-          </View>
         </TouchableOpacity>
       </View>
+      <Image
+        source={{uri: 'https://img.freepik.com/free-vector/colleagues-working-together-project_74855-6308.jpg?t=st=1713856050~exp=1713859650~hmac=aea7248cfc7270370fb8a8e1dd68bc11c023cc430da769eee5f57259826f17f2&w=1380'}}
+        style={{ resizeMode: 'cover', height: "40%", width: "100%" }}
+        /> 
     </View>
   );
 };
@@ -115,7 +117,10 @@ const styles = StyleSheet.create({
       padding: 15, 
       borderRadius: 40, 
       alignItems: 'center', 
-      marginTop: 20
+      marginTop: 20,
+      shadowColor: '#000',
+      shadowOpacity: 0.25,
+      elevation: 5,
     },
     button_label: {
       color: '#FFFFFF',

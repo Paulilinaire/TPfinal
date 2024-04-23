@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import CalendarPicker from "react-native-calendar-picker";
 
-export default class App extends Component {
+export default class CalendarPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,13 +23,14 @@ export default class App extends Component {
     const startDate = selectedStartDate ? selectedStartDate.toString() : "";
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <Text></Text>        
         <CalendarPicker onDateChange={this.onDateChange} />
 
         <View>
           <Text>SELECTED DATE: {startDate}</Text>
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }
