@@ -1,6 +1,8 @@
 import User from "./User.jsx";
 import {useEffect, useState} from "react";
 import {userService} from "../service/user-service.js";
+import Navbar from "../shared/Navbar";
+
 
 const Dashboard = () => {
 
@@ -20,6 +22,8 @@ const Dashboard = () => {
 
     return (
         <>
+            <Navbar />
+            <main className="mt-10">
             {
                 error && (
                     <div>{error}</div>
@@ -27,12 +31,13 @@ const Dashboard = () => {
             }
             {
                 !error && (
-                    <table className="table-auto text-center rounded">
-                        <thead>
+                    <div class="relative overflow-x-auto">
+                    <table className="w-full text-l text-left rounded">
+                        <thead className="text-gray-700 uppercase text-l font-bold">
                         <tr style={{color: "#233863", backgroundColor: "#EAF3FA"}}>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Actions</th>
+                            <th className="px-6 py-3" scope="col">Name</th>
+                            <th className="px-6 py-3" scope="col">Email</th>
+                            <th className="px-6 py-3" scope="col">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -42,8 +47,10 @@ const Dashboard = () => {
                             ))
                         }
                         </tbody>
-                    </table>)
+                    </table>
+                    </div>)
             }
+            </main>
 
         </>
     );

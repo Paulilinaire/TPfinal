@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../shared/Navbar";
 import background from "../assets/backgroundForm.jpg";
 
+
 const EmployeeForm = () => {
   const navigate = useNavigate();
 
