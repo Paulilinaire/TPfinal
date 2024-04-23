@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -50,6 +51,11 @@ public class UserService implements UserDetailsService {
     public User findUserByRole(Role role) {
         return repository.searchUserByRole(role);
     }
+
+    public List<User> findUsersByRole(Role role) {
+        return repository.searchUsersByRole(role);
+    }
+
 
     public boolean verifyUser(String email, String password) {
         return repository.findByEmail(email).map(user -> encoder.matches(password, user.getPassword()))
@@ -98,5 +104,9 @@ public class UserService implements UserDetailsService {
             return true;
         }
         return false;
+    }
+
+    public Optional<User> getUserByEmail(String email) {
+        return repository.findByEmail(email);
     }
 }
