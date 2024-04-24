@@ -8,7 +8,9 @@ import org.example.back.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
 
@@ -43,4 +45,6 @@ public class PointingRepository {
         List<Pointing> results=query.getResultList();
         return results;
     }
+
+
 }

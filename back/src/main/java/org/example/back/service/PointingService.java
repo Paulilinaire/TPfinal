@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -51,5 +53,19 @@ public class PointingService {
         LocalDateTime startDate= date.atStartOfDay();
         LocalDateTime endDate=startDate.withHour(23).withMinute(59).withSecond(59);
         return repository.searchPointingBetweenDate(startDate,endDate,user);
+    }
+
+    public List<Pointing> getPointingOfThePreviousMonth(LocalDateTime localDateTime, User user) {
+        LocalDate currentDate = localDateTime.toLocalDate();
+        LocalDate previousMonth = currentDate.minusMonths(1);
+
+        LocalDate firstDay = previousMonth.withDayOfMonth(1);
+
+        LocalDate lastDay = previousMonth.withDayOfMonth(previousMonth.lengthOfMonth());
+
+        LocalDateTime startOfMonth = firstDay.atStartOfDay();
+        LocalDateTime endOfMonth = lastDay.atTime(LocalTime.MAX);  // This sets time to 23:59:59.999999999
+
+        return repository.searchPointingBetweenDate(startOfMonth, endOfMonth, user);
     }
 }

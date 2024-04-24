@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -75,5 +76,30 @@ public class UserController {
         pointingList=pointingService.getPointingOfTheDay(localDate,user);
 
         return new BaseResponseDto("Success", new WorkHourOnDateDto(totalWorkHours, overtime,pointingList));
+    }
+
+    @PostMapping("/pointing/month")
+    public BaseResponseDto getPointingOfTheMonth(@RequestBody Map<String, String> requestBody) {
+        String date = requestBody.get("date");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime localDateTime = LocalDateTime.parse(date, formatter);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
+        List<Pointing> pointingList = pointingService.getPointingOfThePreviousMonth(localDateTime, user);
+
+        long totalWorkMinutes = 0;
+        for (Pointing p : pointingList) {
+                totalWorkMinutes += ChronoUnit.MINUTES.between(p.getStartDate(), p.getEndDate());
+            }
+        int totalWorkHours = (int) totalWorkMinutes / 60;
+
+        int standardWorkHoursPerMonth = 35 * 4; // Assuming 4 weeks in a month
+        int overtime = totalWorkHours - standardWorkHoursPerMonth;
+        if (overtime < 0) {
+            overtime = 0;
+        }
+
+        return new BaseResponseDto("Success", new WorkHourOnDateDto(totalWorkHours, overtime, pointingList));
     }
 }
