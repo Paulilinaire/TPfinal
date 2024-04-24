@@ -3,6 +3,7 @@ package org.example.back.config;
 import org.example.back.entity.JobTitle;
 import org.example.back.entity.Role;
 import org.example.back.entity.User;
+import org.example.back.service.LoadFakeDataImp;
 import org.example.back.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -15,6 +16,9 @@ public class InitConfig implements CommandLineRunner {
 
     @Autowired
     private UserService service;
+
+    @Autowired
+    private LoadFakeDataImp loadFakeData;
 
 
     private void thereIsAdmin(){
@@ -44,8 +48,8 @@ public class InitConfig implements CommandLineRunner {
                     password("user").
                     role(Role.ROLE_USER).
                     build();
-
             service.createUser(employee);
+            loadFakeData.loadFakeData(employee);
         }
     }
     @Override
