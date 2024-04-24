@@ -6,7 +6,10 @@ import org.example.back.repository.PointingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class PointingService {
@@ -35,5 +38,18 @@ public class PointingService {
             return true;
         }
         return false;
+    }
+
+    public List<Pointing> getPointingOfWeek(LocalDate date,User user){
+        LocalDateTime startOfTheWeek= date.with(DayOfWeek.MONDAY).atStartOfDay();
+        LocalDateTime endOfTheWeek=startOfTheWeek.plusDays(6).withHour(23).withMinute(59).withSecond(59);
+
+        return repository.searchPointingBetweenDate(startOfTheWeek,endOfTheWeek,user);
+    }
+
+    public List<Pointing> getPointingOfTheDay(LocalDate date,User user){
+        LocalDateTime startDate= date.atStartOfDay();
+        LocalDateTime endDate=startDate.withHour(23).withMinute(59).withSecond(59);
+        return repository.searchPointingBetweenDate(startDate,endDate,user);
     }
 }
