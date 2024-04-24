@@ -1,10 +1,12 @@
 package org.example.back.controller;
 
+import org.example.back.dto.UserStatusDto;
 import org.example.back.entity.User;
 import org.example.back.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,8 +27,19 @@ public class AdminController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
+    public ResponseEntity<List<UserStatusDto>> getAllUsers() {
+        List<UserStatusDto> userStatusDtos = new ArrayList<>();
+        for (User user : userService.getAllUsers()) {
+/*
+            Todo :
+             Créer un service
+             qui se sert de la méthode searchLastPointing du PointingRepository
+             et qui renvoit true ou false si le end_date est à null
+*/
+            boolean status = ;
+            userStatusDtos.add(new UserStatusDto(user, status));
+        }
+        return ResponseEntity.ok(userStatusDtos);
     }
 
     @GetMapping("/{id}")
