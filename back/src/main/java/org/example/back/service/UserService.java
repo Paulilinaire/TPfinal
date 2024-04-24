@@ -86,7 +86,6 @@ public class UserService implements UserDetailsService {
         user.setFirstname(userUpdateDetails.getFirstname());
         user.setLastname(userUpdateDetails.getLastname());
         user.setEmail(userUpdateDetails.getEmail());
-        user.setPassword(userUpdateDetails.getPassword());
         if (createUser(user)) {
             return getUserById(id);
         }
