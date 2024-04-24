@@ -14,6 +14,7 @@ const Dashboard = () => {
             .getAllUsers()
             .then((response) => {
                 setUsers(response.data)
+                console.log("responsa data " , response.data)
             })
             .catch((error) => {
                 setError("Erreur lors de la récupération des utilisateurs")
@@ -23,37 +24,31 @@ const Dashboard = () => {
     return (
         <>
             <Navbar />
-            <main className="mt-10">
-            {
-                error && (
-                    <div>{error}</div>
-                )
-            }
-            {
-                !error && (
-                    <div class="relative overflow-x-auto">
-                    <table className="w-full text-l text-left rounded">
-                        <thead className="text-gray-700 uppercase text-l font-bold">
-                        <tr style={{color: "#233863", backgroundColor: "#EAF3FA"}}>
-                            <th className="px-6 py-3" scope="col">Name</th>
-                            <th className="px-6 py-3" scope="col">Email</th>
-                            <th className="px-6 py-3" scope="col">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {
-                            users.map((user, index) => (
-                                <User user={user} key={index}/>
-                            ))
-                        }
-                        </tbody>
-                    </table>
-                    </div>)
-            }
+            <main className="mt-20 flex flex-col overflow-x-auto">
+                {error ? (
+                    <div className="text-center text-red-600">{error}</div>
+                ) : (
+                    <div className="flex justify-center"> 
+                        <table 
+                            className="w-3/4 text-left text-l rounded-lg overflow-hidden shadow-lg">
+                            <thead className="text-gray-700 uppercase font-bold">
+                                <tr style={{color: "#233863", backgroundColor: "#EAF3FA"}}>
+                                    <th className="px-6 py-3">Name</th>
+                                    <th className="px-6 py-3">Email</th>
+                                    <th className="px-6 py-3">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {users.map((user, index) => (
+                                    <User user={user} key={index} />
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </main>
-
         </>
     );
-}
+};
 
 export default Dashboard;

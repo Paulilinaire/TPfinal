@@ -29,11 +29,11 @@ const EmployeeDetails = () => {
             </li>
             <hr className="h-px bg-blue-200 border-0 mb-4" />
             <li style={{ color: "#233863" }} class="font-bold">
-              Lastname:{" "}
+              Last name:{" "}
             </li>
             <hr className="h-px bg-blue-200 border-0 mb-4" />
             <li style={{ color: "#233863" }} class="font-bold">
-              Firstname:{" "}
+              First name:{" "}
             </li>
             <hr className="h-px bg-blue-200 border-0 mb-4" />
             <li style={{ color: "#233863" }} class="font-bold">
@@ -48,14 +48,14 @@ const EmployeeDetails = () => {
               className="px-5 py-3 text-base font-bold text-white rounded-lg text-center"
               onClick={() => navigate(-1)}
             >
-              <i class="bi bi-trash-fill me-2"></i>Delete
+              <i className="bi bi-trash-fill me-2"></i>Delete
             </button>
             <button
               type="submit"
               style={{ backgroundColor: "#3586FD" }}
               className="px-7 py-3 text-base font-bold text-white rounded-lg text-center"
             >
-              <i class="bi bi-pencil-fill me-2"></i>Edit
+              <i className="bi bi-pencil-fill me-2"></i>Edit
             </button>
           </div>
         </div>

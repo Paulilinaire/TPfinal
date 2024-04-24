@@ -21,11 +21,21 @@ const deleteUser = (id) => {
     return api.delete(`/admin/users/${id}`, {headers: authHeader()});
 };
 
+const getJobTitles = () => {
+    return api.get(`/job-title`)
+};
+
+const getRoles = () => {
+    return api.get(`/role`)
+};
+
 export const userService =
     {
         createUser,
         getAllUsers,
         getUserById,
         updateUser,
-        deleteUser
+        deleteUser,
+        getJobTitles,
+        getRoles
     };
