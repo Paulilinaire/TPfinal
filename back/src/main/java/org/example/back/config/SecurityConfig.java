@@ -40,6 +40,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize->authorize.requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/user/**").hasRole("USER")
+                        .requestMatchers("api/job-title/**").permitAll()
+                        .requestMatchers("api/role/**").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(entryPoint))
                 .addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class)

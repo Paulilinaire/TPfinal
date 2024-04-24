@@ -39,7 +39,7 @@ public class InitConfig implements CommandLineRunner {
             User employee=User.builder().
                     firstname("user").
                     lastname("user").
-                    jobTitle(JobTitle.SALARY).
+                    jobTitle(JobTitle.EMPLOYEE).
                     email("user@mail.fr").
                     password("user").
                     role(Role.ROLE_USER).
