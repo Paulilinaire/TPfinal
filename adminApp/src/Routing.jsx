@@ -18,7 +18,7 @@ const Routing = createBrowserRouter([
     element: <EmployeeDetails />,
   },
   {
-    path: "/form",
+    path: "/form/:id?",
     element: <EmployeeForm />,
   },
 ]);

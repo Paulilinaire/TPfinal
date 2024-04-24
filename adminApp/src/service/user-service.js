@@ -13,8 +13,8 @@ const getUserById = (id) => {
     return api.get(`/admin/users/${id}`, {headers: authHeader()});
 };
 
-const updateUser = (id) => {
-    return api.put(`/admin/users/${id}`, id, {headers: authHeader()});
+const updateUser = (id, user) => {
+    return api.put(`/admin/users/${id}`, user, {headers: authHeader()});
 };
 
 const deleteUser = (id) => {

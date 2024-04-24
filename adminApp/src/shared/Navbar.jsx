@@ -4,7 +4,7 @@ import logo from "../assets/LOGO.png";
 const Navbar = () => {
 
   return (
-    <div className="bg-white w-screen flex items-center justify-between pe-20">
+    <div className="bg-white w-screen flex items-center justify-between pe-20 shadow-lg">
       <Link to="/dashboard" className="flex items-center space-x-2 ps-5">
         <img src={logo} alt="Logo" className="size-36" /> 
         <h2 className="text-2xl">

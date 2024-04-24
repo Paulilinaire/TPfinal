@@ -5,7 +5,7 @@ import background from "../assets/backgroundForm.jpg";
 import { userService } from "../service/user-service";
 
 const EmployeeForm = () => {
-  const { userId } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [firstname, setFirstname] = useState("");
@@ -27,8 +27,8 @@ const EmployeeForm = () => {
         const rolesResponse = await userService.getRoles();
         setRoles(rolesResponse.data);
 
-        if (userId) {
-          const userResponse = await userService.getUserById(userId);
+        if (id) {
+          const userResponse = await userService.getUserById(id);
           const user = userResponse.data;
           setFirstname(user.firstname);
           setLastname(user.lastname);
@@ -42,7 +42,7 @@ const EmployeeForm = () => {
     };
 
     fetchData();
-  }, [userId]);
+  }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,12 +53,12 @@ const EmployeeForm = () => {
       jobTitle,
       role,
       email,
-      password
+      password: id ? undefined : password, // Do not send the password when editing
     };
 
     try {
-      if (userId) {
-        await userService.updateUser(userId, user);
+      if (id) {
+        await userService.updateUser(id, user);
       } else {
         await userService.createUser(user);
       }
@@ -84,10 +84,10 @@ const EmployeeForm = () => {
             style={{ color: "#233863" }}
             className="font-semibold text-2xl text-left mb-6"
           >
-            {userId ? "Edit Employee" : "Create Employee"} 
+            {id ? "Edit Employee" : "Create Employee"} 
           </h3>
 
-          {error && <div className="text-red-600 text-center mb-4">{error}</div>}
+          {error && <div className="text-red-600 text-left mb-4">{error}</div>}
 
           <form onSubmit={handleSubmit} className="flex flex-col">
             <div className="flex flex-row gap-6">
@@ -153,8 +153,8 @@ const EmployeeForm = () => {
               className="shadow-inner bg-gray-50 border text-sm rounded-3xl p-3 w-full mt-4"
               required
             />
-            {userId ? (
-              <div className="text-center">
+            {id ? (
+              <div className="text-left">
                 * Password change not allowed when editing
               </div>
             ) : (
@@ -183,7 +183,7 @@ const EmployeeForm = () => {
                 style={{ backgroundColor: "#3586FD" }}
                 className="px-6 py-3 text-base font-bold text-white rounded-lg text-center"
               > <i className="bi bi-check-circle-fill me-2"></i>
-                {userId ? "Update" : "Submit"}
+                {id ? "Update" : "Submit"}
               </button>
             </div>
           </form>
