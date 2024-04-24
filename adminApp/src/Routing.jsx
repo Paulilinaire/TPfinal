@@ -14,7 +14,7 @@ const Routing = createBrowserRouter([
     element: <Dashboard />,
   },
   {
-    path: "/details",
+    path: "/details/:id",
     element: <EmployeeDetails />,
   },
   {

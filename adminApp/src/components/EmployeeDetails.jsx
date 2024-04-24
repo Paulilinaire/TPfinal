@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
 import Navbar from "../shared/Navbar";
 import background from "../assets/backgroundDetails.jpg";
+import {userService} from "../service/user-service.js";
 
 const EmployeeDetails = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
   return (
     <>
