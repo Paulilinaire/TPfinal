@@ -1,12 +1,13 @@
 import {useNavigate} from "react-router-dom";
 
-const User = ({user}) => {
+const User = ({user, status}) => {
 
     const navigate = useNavigate();
 
     return (
         <>
             <tr className="bg-white border-b border-blue-200">
+                <td className="px-6 py-3">{status ? "Online" : "Offline"}</td>
                 <th scope="row" className="px-6 py-4" style={{color: "#233863"}}>{user.firstname} {user.lastname}</th>
                 <td className="px-6 py-3" style={{color: "#3586FD"}}>{user.email}</td>
                 <td className="px-6 py-3">
