@@ -3,6 +3,7 @@ package org.example.back.controller;
 import org.example.back.dto.UserStatusDto;
 import org.example.back.entity.User;
 import org.example.back.service.UserService;
+import org.example.back.service.UserStatusService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +17,11 @@ import java.util.Map;
 public class AdminController {
 
     private final UserService userService;
+    private final UserStatusService userStatusService;
 
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, UserStatusService userStatusService) {
         this.userService = userService;
+        this.userStatusService = userStatusService;
     }
 
     @PostMapping
@@ -30,13 +33,7 @@ public class AdminController {
     public ResponseEntity<List<UserStatusDto>> getAllUsers() {
         List<UserStatusDto> userStatusDtos = new ArrayList<>();
         for (User user : userService.getAllUsers()) {
-/*
-            Todo :
-             Créer un service
-             qui se sert de la méthode searchLastPointing du PointingRepository
-             et qui renvoit true ou false si le end_date est à null
-*/
-            boolean status = ;
+            boolean status = userStatusService.getUserStatus(user);
             userStatusDtos.add(new UserStatusDto(user, status));
         }
         return ResponseEntity.ok(userStatusDtos);
