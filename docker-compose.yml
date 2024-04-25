@@ -1,0 +1,66 @@
+version: "3"
+
+services:
+  # Database
+  bdd:
+    container_name: bdd
+    image: mysql
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: tp_final
+      MYSQL_PASSWORD: password
+    networks:
+      - mysql-phpmyadmin
+  phpmyadmin:
+    depends_on:
+      - bdd
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8090:80"
+    environment:
+      PMA_HOST: bdd
+    networks:
+      - mysql-phpmyadmin
+
+  back:
+    container_name: back
+    ports:
+      - 9000:9000
+    environment:
+      - DATABASE_HOST=bdd
+      - DATABASE_PORT=3306
+      - DATABASE_NAME=tp_final
+      - DATABASE_USERNAME=root
+      - DATABASE_PASS=password
+      - PORT=9000
+    build:
+      dockerfile: ./back/Dockerfile
+    depends_on:
+      - bdd
+    networks:
+      - mysql-phpmyadmin
+
+  react-nginx:
+    build:
+      context: ./adminApp
+      dockerfile: Dockerfile
+    container_name: react-nginx
+    ports:
+      - 3000:80
+    depends_on:
+      - back
+    networks:
+      - mysql-phpmyadmin
+
+networks:
+  mysql-phpmyadmin:
+    driver: bridge
+
+volumes:
+  db_data:

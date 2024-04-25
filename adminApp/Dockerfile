@@ -1,0 +1,24 @@
+# Image de depart
+FROM node AS build
+
+WORKDIR /app
+
+# copie de pacjage.json et package-lock.json
+COPY ./package*.json ./
+
+# Installation des dependances
+RUN npm install 
+
+COPY . . 
+
+# build de l'application
+RUN npm run build
+
+# Pour mettre notre application sur un serveur
+FROM nginx
+
+COPY --from=build /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx","-g","daemon off;"]

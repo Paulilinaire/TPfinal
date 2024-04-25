@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 @Service
 public class LoadFakeDataImp implements LoadFakeData {
 
-    private final String DATA_DIRECTORY = "src/main/resources/fake_data";
+    private final String DATA_DIRECTORY = "./";
     private final String FAKE_POINTING_FILE = "pointing-data.txt";
 
     @Autowired
