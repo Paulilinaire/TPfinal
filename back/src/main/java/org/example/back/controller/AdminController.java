@@ -4,9 +4,11 @@ import org.example.back.dto.BaseResponseDto;
 import org.example.back.dto.MonthPointingDto;
 import org.example.back.dto.WorkHourOnDateDto;
 import org.example.back.entity.Pointing;
+import org.example.back.dto.UserStatusDto;
 import org.example.back.entity.User;
 import org.example.back.service.PointingService;
 import org.example.back.service.UserService;
+import org.example.back.service.UserStatusService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,12 +27,14 @@ import java.util.Map;
 public class AdminController {
 
     private final UserService userService;
+    private final UserStatusService userStatusService;
 
     private final PointingService pointingService;
 
-    public AdminController(UserService userService, PointingService pointingService) {
+    public AdminController(UserService userService, PointingService pointingService, UserStatusService userStatusService) {
         this.userService = userService;
         this.pointingService = pointingService;
+        this.userStatusService = userStatusService;
     }
 
     @PostMapping
@@ -38,8 +43,13 @@ public class AdminController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
+    public ResponseEntity<List<UserStatusDto>> getAllUsers() {
+        List<UserStatusDto> userStatusDtos = new ArrayList<>();
+        for (User user : userService.getAllUsers()) {
+            boolean status = userStatusService.getUserStatus(user);
+            userStatusDtos.add(new UserStatusDto(user, status));
+        }
+        return ResponseEntity.ok(userStatusDtos);
     }
 
     @GetMapping("/{id}")
