@@ -1,8 +1,20 @@
-# React + Vite
+# TimeFlow Application Web Administrateur
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+L'application a été réalisée avec React et Tailwind pour le CSS. Elle permet la gestion des employés qui auront accès à l'application mobile.
+Elle permet notamment l'ajout, la modification, la suppression d'employés et l'affichage de rapport des heures travaillées de celui-ci.
 
-Currently, two official plugins are available:
+## Installler l'application
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Afin d'installer les modules nécessaires au fonctionnement de l'application, ouvrir un terminal, au niveau de la racine de l'application et taper la commande :
+
+```
+npm i
+```
+
+## Lancer l'application
+
+Pour lancer l'application taper la commande :
+
+```
+npm run dev
+```
