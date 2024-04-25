@@ -2,6 +2,7 @@ package org.example.back.controller;
 
 import org.example.back.dto.BaseResponseDto;
 import org.example.back.dto.UserLoginDto;
+import org.example.back.entity.Role;
 import org.example.back.entity.User;
 import org.example.back.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,11 @@ public class AuthenticationController {
                 String token = userService.generateToken(mail, password);
                 Map<String, Object> data = new HashMap<>();
                 data.put("token", token);
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                User user=(User) authentication.getPrincipal();
+                if(user.getRole()!= Role.ROLE_ADMIN){
+                    return ResponseEntity.badRequest().body("Bad login");
+                }
                 return ResponseEntity.ok(data);
             } else {
                 return ResponseEntity.badRequest().body("Bad login");
