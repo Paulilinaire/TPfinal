@@ -51,8 +51,6 @@ export default function Modal(props) {
           </div>
           {/* Overlay */}
           <div className="fixed h-screen w-screen bg-black opacity-25 inset-0 z-10"></div>
-        
-      
       </>
   );
 } 
