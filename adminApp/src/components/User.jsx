@@ -1,13 +1,37 @@
 import {useNavigate} from "react-router-dom";
 
-const User = ({user, status}) => {
+const User = (props) => {
+
+    const {user, status} = props.userInfos;
 
     const navigate = useNavigate();
 
     return (
         <>
             <tr className="bg-white border-b border-blue-200">
-                <td className="px-6 py-3">{status ? "Online" : "Offline"}</td>
+                <td className="px-6 py-3">
+                    {
+                        status ?
+                            <div className="relative inline-flex">
+                                <span
+                                    className="align-middle font-sans font-bold text-center uppercase text-xs px-6">
+                                    Online
+                                </span>
+                                <span
+                                    className="absolute min-w-[12px] min-h-[12px] rounded-full content-[''] bg-green-500"/>
+                            </div>
+                            :
+                            <div className="relative inline-flex">
+                                <span
+                                    className="absolute min-w-[12px] min-h-[12px] rounded-full content-[''] bg-red-500"/>
+                                <span
+                                    className="align-middle font-sans font-bold text-center uppercase text-xs px-6">
+                                    Offline
+                                </span>
+
+                            </div>
+                    }
+                </td>
                 <th scope="row" className="px-6 py-4" style={{color: "#233863"}}>{user.firstname} {user.lastname}</th>
                 <td className="px-6 py-3" style={{color: "#3586FD"}}>{user.email}</td>
                 <td className="px-6 py-3">

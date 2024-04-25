@@ -14,12 +14,6 @@ const Dashboard = () => {
             .getAllUsers()
             .then((response) => {
                 setUsers(response.data)
-                console.log("response data " , response.data)
-                for (let i = 0; i < response.data.length; i++) {
-                    console.log("user " , response.data[i].user)
-                    console.log("status" , response.data[i].status)
-                }
-
             })
             .catch((error) => {
                 setError("Erreur lors de la récupération des utilisateurs")
@@ -46,7 +40,7 @@ const Dashboard = () => {
                             </thead>
                             <tbody>
                                 {users.map((userInfos, index) => (
-                                    <User user={userInfos.user} status={userInfos.status} key={index} />
+                                    <User userInfos={userInfos} key={index} />
                                 ))}
                             </tbody>
                         </table>
