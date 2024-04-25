@@ -13,20 +13,16 @@ Tout d'abord, il faut installer les packages utilisées dans l'appication en tap
 npm install
 ```
 
-Tout d'abord, vous devrez lancer **Metro**, le bundler JavaScript qui est inclus avec React Native. Pour lancer Metro, taper la commande depuis la racine du projet React-Native:
-
-```bash
-npm run dev
-```
-
 ## Etape 2: Démarrer l'application
 
-Laissez Metro Bundler fonctionner dans son propre terminal. 
 Depuis Android Studio, démarer une nouvelle device et depuis la racine de votre projet React Native, éxécuter la commande suivante:
 
 ```bash
-npm run android
+npx react-native run-android
 ```
+**Metro**, le bundler JavaScript qui est inclus avec React Native se lance ainsi que l'application sur la device que vous avez demarré.
+Laissez Metro Bundler fonctionner dans son propre terminal. 
+
 
 ## Bravo! :tada:
 
