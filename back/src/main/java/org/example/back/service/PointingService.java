@@ -55,9 +55,8 @@ public class PointingService {
         return repository.searchPointingBetweenDate(startDate,endDate,user);
     }
 
-    public List<Pointing> getPointingOfThePreviousMonth(LocalDateTime localDateTime, User user) {
-        LocalDate currentDate = localDateTime.toLocalDate();
-        LocalDate previousMonth = currentDate.minusMonths(1);
+    public List<Pointing> getPointingOfThePreviousMonth(LocalDate localDate, User user) {
+        LocalDate previousMonth = localDate.minusMonths(1);
 
         LocalDate firstDay = previousMonth.withDayOfMonth(1);
 
