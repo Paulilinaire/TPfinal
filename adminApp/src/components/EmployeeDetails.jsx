@@ -57,19 +57,19 @@ const EmployeeDetails = () => {
             <>
               <ul>
                 <li style={{ color: "#233863" }} class="font-bold">
-                  Fonction: {user.jobTitle}
+                  Fonction: <span className="font-medium">{user.jobTitle}</span>
                 </li>
                 <hr className="h-px bg-blue-200 border-0 mb-4" />
                 <li style={{ color: "#233863" }} class="font-bold">
-                  Last name: {user.lastname}
+                  Last name: <span className="font-medium">{user.lastname}</span>
                 </li>
                 <hr className="h-px bg-blue-200 border-0 mb-4" />
                 <li style={{ color: "#233863" }} class="font-bold">
-                  First name: {user.firstname}
+                  First name: <span className="font-medium">{user.firstname}</span>
                 </li>
                 <hr className="h-px bg-blue-200 border-0 mb-4" />
                 <li style={{ color: "#233863" }} class="font-bold">
-                  Email: {user.email}
+                  Email: <span className="font-medium">{user.email}</span>
                 </li>
                 <hr className="h-px bg-blue-200 border-0 mb-4" />
               </ul>

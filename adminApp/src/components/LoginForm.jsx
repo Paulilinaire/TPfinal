@@ -73,7 +73,7 @@ const LoginForm = () => {
             <button
               type="submit"
               style={{ backgroundColor: "#233863" }}
-              class="mt-5 mb-24 w-8/12 px-6 py-3.5 text-base font-medium text-white rounded-lg text-center"
+              class="mt-5 mb-24 w-8/12 px-6 py-3.5 text-base font-bold text-white rounded-lg text-center"
             >
               Log in
             </button>

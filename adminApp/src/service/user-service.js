@@ -29,6 +29,7 @@ const getRoles = () => {
     return api.get(`/role`)
 };
 
+
 export const userService =
     {
         createUser,
@@ -37,5 +38,5 @@ export const userService =
         updateUser,
         deleteUser,
         getJobTitles,
-        getRoles
+        getRoles,
     };

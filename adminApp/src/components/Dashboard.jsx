@@ -14,7 +14,6 @@ const Dashboard = () => {
             .getAllUsers()
             .then((response) => {
                 setUsers(response.data)
-                console.log("responsa data " , response.data)
             })
             .catch((error) => {
                 setError("Erreur lors de la récupération des utilisateurs")
@@ -33,14 +32,15 @@ const Dashboard = () => {
                             className="w-3/4 text-left text-l rounded-lg overflow-hidden shadow-lg">
                             <thead className="text-gray-700 uppercase font-bold">
                                 <tr style={{color: "#233863", backgroundColor: "#EAF3FA"}}>
+                                    <th className="px-6 py-3">Status</th>
                                     <th className="px-6 py-3">Name</th>
                                     <th className="px-6 py-3">Email</th>
                                     <th className="px-6 py-3">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {users.map((user, index) => (
-                                    <User user={user} key={index} />
+                                {users.map((userInfos, index) => (
+                                    <User userInfos={userInfos} key={index} />
                                 ))}
                             </tbody>
                         </table>
