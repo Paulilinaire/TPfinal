@@ -71,7 +71,7 @@ export default function HomePage({route, navigation}) {
           <Text style={styles.button_label}>{'Clock-out'}</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.clockOutButton}
+          style={styles.planningButton}
           onPress={handlePlanning}>
           <Text style={styles.button_label}>{'Planning'}</Text>
         </TouchableOpacity>
@@ -112,6 +112,16 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     marginTop: 20,
+    shadowColor: '#000',
+    shadowOpacity: 0.25,
+    elevation: 5,
+  },
+  planningButton: {
+    backgroundColor: '#233863',
+    padding: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    marginTop: 60,
     shadowColor: '#000',
     shadowOpacity: 0.25,
     elevation: 5,
